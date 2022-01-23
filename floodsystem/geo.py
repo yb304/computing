@@ -20,3 +20,22 @@ def stations_by_distance(stations, p):
     """
     # TODO
     return None
+
+
+def stations_by_river(stations):
+    """
+    Groups stations by the river they are on.
+
+    Args:
+      stations: list of MonitoringStation objects
+    Returns:
+      A dictionary mapping river names (string) to a list of MonitoringStation objects
+    """
+    ret = {}
+    for s in stations:
+        river = s.river
+        if river in ret:
+            ret[river].append(s)
+        else:
+            ret[river] = [s]
+    return ret
