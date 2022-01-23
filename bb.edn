@@ -1,0 +1,14 @@
+;;
+{:tasks
+ {:requires [[clojure.string :as str]]
+
+  :init (defn task->file [t]
+          (str "Task" (str/upper-case t) ".py"))
+
+  task (shell "python" (task->file (first *command-line-args*)))
+
+  test (apply shell "python" "-m" "pytest"
+              (map (fn [s] (if (str/ends-with? s ".py")
+                             s
+                             (str "test_" s ".py")))
+                   *command-line-args*))}}

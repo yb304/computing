@@ -8,3 +8,6 @@ __pycache__/
 .DS_Store
 
 .vscode/
+
+.lsp/.cache
+.clj-kondo/.cache
