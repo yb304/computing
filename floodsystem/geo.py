@@ -6,6 +6,7 @@ geographical data.
 
 """
 
+from haversine import haversine
 from .utils import sorted_by_key  # noqa
 
 
@@ -18,6 +19,11 @@ def stations_by_distance(stations, p):
       A list of (station, distance) tuples, sorted by distance in ascending order.
       `distance` (float) is from the coordinate `p` to the station (MonitoringStation).
     """
+    dists = map(lambda s: (s, haversine(s.coord, p)), stations)
+    return sorted_by_key(dists, 1)
+
+
+def stations_within_radius(stations, centre, r):
     # TODO
     return None
 
