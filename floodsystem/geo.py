@@ -6,7 +6,7 @@ geographical data.
 
 """
 
-from haversine import haversine
+from math import haversine
 from .utils import sorted_by_key  # noqa
 
 
@@ -45,3 +45,14 @@ def stations_by_river(stations):
         else:
             ret[river] = [s]
     return ret
+
+def rivers_by_station_number(stations, N):
+  full_list = sorted_by_key([(key,len(value)) for key, value in stations_by_river(stations).items()], 1, reverse=True)
+  new_list = full_list[:N]
+  for i in range(N, len(full_list)):
+    if full_list[i][1] < full_list[N-1][1]:
+      break
+    else:
+      new_list.append(full_list[i])
+
+  return new_list
