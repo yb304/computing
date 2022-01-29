@@ -1,15 +1,18 @@
 import sys
 import random
+from functools import reduce
 import type_validation as tv
 
 from floodsystem.station import MonitoringStation
-from floodsystem.geo import stations_by_distance, stations_within_radius, rivers_with_station
+from floodsystem.geo import \
+    stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river
 from floodsystem.stationdata import build_station_list
 
 
 _o_stations_by_distance = stations_by_distance
 _o_stations_within_radius = stations_within_radius
 _o_rivers_with_station = rivers_with_station
+_o_stations_by_river = stations_by_river
 
 
 def _i_stations_by_distance(stations, p):
@@ -41,17 +44,28 @@ def _i_stations_within_radius(stations, centre, r):
     return ret
 
 
-def _i_rivers_with_station(station):
+def _i_rivers_with_station(stations):
     tv.assert_type(stations, (list, MonitoringStation))
-    ret = _o_rivers_with_station(station)
-    tv.assert_type(ret, (set, # non-empty string
-                         ("and", [str, lambda x: x])))
+    ret = _o_rivers_with_station(stations)
+    tv.assert_type(ret, (set, tv.non_empty_str_spec))
+    return ret
+
+
+def _i_stations_by_river(stations):
+    tv.assert_type(stations, (list, MonitoringStation))
+    ret = _o_stations_by_river(stations)
+    tv.assert_type(ret,
+                   (dict,
+                    tv.non_empty_str_spec,
+                    ("and", [(list, MonitoringStation),
+                             (lambda l: len(l) > 0)])))
     return ret
 
 
 stations_by_distance = _i_stations_by_distance
 stations_within_radius = _i_stations_within_radius
 rivers_with_station = _i_rivers_with_station
+stations_by_river = _i_stations_by_river
 
 stations = build_station_list()
 
@@ -91,3 +105,16 @@ def test_rivers_with_station():
         rivers = rivers_with_station(sample)
         assert len(rivers) > 0
         assert len(rivers) <= len(sample)
+
+
+def test_stations_by_river():
+    sbr = stations_by_river(stations)
+    ret_stations = reduce(lambda acc, sl: acc + sl, sbr.values(), [])
+    ret_stations_set = set(ret_stations)
+    # no duplicate stations
+    assert len(ret_stations) == len(ret_stations_set)
+    # no missing stations
+    assert set(stations) == ret_stations_set
+    # all rivers included
+    ret_rivers = set(sbr.keys())
+    assert ret_rivers == rivers_with_station(stations)

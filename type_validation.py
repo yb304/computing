@@ -17,6 +17,21 @@ def check_tuple(x, args):
     return (True,)
 
 
+def check_dict(x, args):
+    kspec = args[0]
+    vspec = args[1]
+    if not isinstance(x, dict):
+        return (False, "Not a dictionary")
+    for k, v in x.items():
+        kr = check_type(k, kspec)
+        if not kr[0]:
+            return kr
+        vr = check_type(v, vspec)
+        if not vr[0]:
+            return vr
+    return (True,)
+
+
 def check_list(x, args):
     itemspec = args[0]
     if not isinstance(x, list):
@@ -51,6 +66,7 @@ def check_and(x, args):
 name_to_checker = {list: check_list,
                    tuple: check_tuple,
                    set: check_set,
+                   dict: check_dict,
                    "and": check_and}
 
 
@@ -127,3 +143,4 @@ def assert_type(x, spec):
 
 
 non_neg_p = partial(op.le, 0)
+non_empty_str_spec = ("and", [str, (lambda x: x)])
