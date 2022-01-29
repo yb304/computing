@@ -25,7 +25,15 @@ def stations_by_distance(stations, p):
 
 def stations_within_radius(stations, centre, r):
     # TODO
-    return None
+    station_list = stations_by_distance(stations, centre)
+
+    new_list = []
+    for x in station_list:
+      if x[1] <= r:
+        new_list.append(x[0])
+      else:
+        break
+    return new_list
 
 
 def stations_by_river(stations):
