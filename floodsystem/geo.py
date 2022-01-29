@@ -6,7 +6,7 @@ geographical data.
 
 """
 
-from math import haversine
+from haversine import haversine
 from .utils import sorted_by_key  # noqa
 
 
@@ -57,4 +57,3 @@ def rivers_by_station_number(stations, N):
 
   return new_list
 
-  
