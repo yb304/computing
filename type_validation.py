@@ -28,6 +28,17 @@ def check_list(x, args):
     return (True,)
 
 
+def check_set(x, args):
+    itemspec = args[0]
+    if not isinstance(x, set):
+        return (False, "Not a set")
+    for item in x:
+        r = check_type(item, itemspec)
+        if not r[0]:
+            return r
+    return (True,)
+
+
 def check_and(x, args):
     specs = args[0]
     for s in specs:
@@ -39,6 +50,7 @@ def check_and(x, args):
 
 name_to_checker = {list: check_list,
                    tuple: check_tuple,
+                   set: check_set,
                    "and": check_and}
 
 

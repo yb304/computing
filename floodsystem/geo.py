@@ -36,6 +36,19 @@ def stations_within_radius(stations, centre, r):
     return new_list
 
 
+def rivers_with_station(stations):
+    """
+    Args:
+      stations: list of MonitoringStation objects
+    Returns:
+      A set of names (string) of rivers that have an associated monitoring station.
+    """
+    rivers = set()
+    for s in stations:
+        rivers.add(s.river)
+    return rivers
+
+
 def stations_by_river(stations):
     """
     Groups stations by the river they are on.
