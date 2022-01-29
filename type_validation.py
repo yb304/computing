@@ -100,7 +100,7 @@ def assert_type(x, spec):
     result = check_spec(x, spec)
     if not result[0]:
         msg = result[1]
-        msg = "" if msg == None else "\n" + msg
+        msg = "" if msg is None else "\n" + msg
         raw_x_str = str(x)
         x_str = truncate_lines_re.match(raw_x_str).group()
         if len(x_str) < len(raw_x_str):

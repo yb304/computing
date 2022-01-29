@@ -29,10 +29,10 @@ def stations_within_radius(stations, centre, r):
 
     new_list = []
     for x in station_list:
-      if x[1] <= r:
-        new_list.append(x[0])
-      else:
-        break
+        if x[1] <= r:
+            new_list.append(x[0])
+        else:
+            break
     return new_list
 
 
@@ -54,16 +54,22 @@ def stations_by_river(stations):
             ret[river] = [s]
     return ret
 
-def rivers_by_station_number(stations, N):
-  full_list = sorted_by_key([(key,len(value)) for key, value in stations_by_river(stations).items()], 1, reverse=True)
-  new_list = full_list[:N]
-  for i in range(N, len(full_list)):
-    if full_list[i][1] < full_list[N-1][1]:
-      break
-    else:
-      new_list.append(full_list[i])
 
-  return new_list
+def rivers_by_station_number(stations, N):
+    full_list = sorted_by_key(
+        [(key, len(value))
+         for key, value in stations_by_river(stations).items()],
+        1,
+        reverse=True)
+    new_list = full_list[:N]
+    for i in range(N, len(full_list)):
+        if full_list[i][1] < full_list[N - 1][1]:
+            break
+        else:
+            new_list.append(full_list[i])
+
+    return new_list
+
 
 def inconsistent_typical_range_stations(stations):
-  return [n for n in stations if not n.typical_range_consistent()]
+    return [n for n in stations if not n.typical_range_consistent()]
