@@ -24,9 +24,13 @@ def stations_by_distance(stations, p):
 
 
 def stations_within_radius(stations, centre, r):
-    # TODO
+    """
+    Args:
+      stations: list of MonitoringStation objects
+      centre: tuple(float, float); coordinate of cambridge city centre
+      r: float radius of circle searched
+    """
     station_list = stations_by_distance(stations, centre)
-
     new_list = []
     for x in station_list:
         if x[1] <= r:
@@ -69,6 +73,14 @@ def stations_by_river(stations):
 
 
 def rivers_by_station_number(stations, N):
+    """
+    Args:
+      stations: list of MonitoringStation objects
+      N: number of rivers returned with largest number of stations on it
+    Returns:
+      list of nuples including river names and station number in a descending order
+    """
+
     full_list = sorted_by_key(
         [(key, len(value))
          for key, value in stations_by_river(stations).items()],
@@ -84,5 +96,4 @@ def rivers_by_station_number(stations, N):
     return new_list
 
 
-def inconsistent_typical_range_stations(stations):
-    return [n for n in stations if not n.typical_range_consistent()]
+
