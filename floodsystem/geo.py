@@ -57,3 +57,5 @@ def rivers_by_station_number(stations, N):
 
   return new_list
 
+def inconsistent_typical_range_stations(stations):
+  return [n for n in stations if not n.typical_range_consistent()]
