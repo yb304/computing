@@ -8,7 +8,9 @@
   task (shell "python" (task->file (first *command-line-args*)))
 
   test (apply shell "python" "-m" "pytest"
-              (map (fn [s] (if (str/ends-with? s ".py")
-                             s
-                             (str "test_" s ".py")))
-                   *command-line-args*))}}
+              (or (seq (map (fn [s]
+                              (if (str/ends-with? s ".py")
+                                s
+                                (str "test_" s ".py")))
+                            *command-line-args*))
+                  ["--cov=floodsystem"]))}}
