@@ -66,9 +66,9 @@ def test_stations_within_radius():
 
     # If a large radius is given, all stations should be included
     res_all = stations_within_radius(stations, (0., 0.), sys.float_info.max)
-    assert res_all == stations
+    assert set(res_all) == set(stations)
 
     # When centre equals the coordinate of a station, that station should be included
-    for s in stations:
+    for s in random.sample(stations, 10):
         res = stations_within_radius(stations, s.coord, 0.01)
         assert s in res
