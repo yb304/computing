@@ -47,3 +47,4 @@ def inconsistent_typical_range_stations(stations):
       list of stations with inconsistent data
     """
     return [n for n in stations if not n.typical_range_consistent()]
+    

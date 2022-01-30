@@ -5,7 +5,6 @@
 geographical data.
 
 """
-
 from haversine import haversine
 from .utils import sorted_by_key  # noqa
 
@@ -78,7 +77,7 @@ def rivers_by_station_number(stations, N):
       stations: list of MonitoringStation objects
       N: number of rivers returned with largest number of stations on it
     Returns:
-      list of nuples including river names and station number in a descending order
+      list of tuples including river names and station number in a descending order
     """
 
     full_list = sorted_by_key(

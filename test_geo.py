@@ -1,11 +1,12 @@
 import sys
 import random
 from functools import reduce
+from tkinter import N
 import type_validation as tv
 
 from floodsystem.station import MonitoringStation
 from floodsystem.geo import \
-    stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river
+    stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river, rivers_by_station_number
 from floodsystem.stationdata import build_station_list
 
 
@@ -118,3 +119,23 @@ def test_stations_by_river():
     # all rivers included
     ret_rivers = set(sbr.keys())
     assert ret_rivers == rivers_with_station(stations)
+
+def test_rivers_by_station_number():
+    list1 = rivers_by_station_number(stations, len(stations))
+    list2 = rivers_by_station_number(stations, 9)
+
+    limit = list2[-1][1]
+    river_list = {}
+    # all items in list 2 should be greater or equal to the number of station of the last item in the list
+    for i in list1:
+        river_list[i[0]] = i[1]
+        if i[1] >= limit:
+            assert(i in list2)
+        else:
+            assert(i not in list2)
+    # number of entries should be greater or equal to the stations input         
+    for i in list2:
+        assert len(list2) >= len(rivers_by_station_number(stations, N))
+    # empty list    
+    for i, zero in river_list.items():
+        assert(zero == 0)
