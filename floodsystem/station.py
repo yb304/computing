@@ -42,7 +42,7 @@ class MonitoringStation:
 
     def typical_range_consistent(self):
         """
-        return values for range with no data or high range is lower than low range of data 
+        return false for range with no data or high point is lower than low point of river 
           
         """
         return self.typical_range == None or self.typical_range[
