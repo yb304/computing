@@ -6,6 +6,19 @@
 from re import S
 from floodsystem.station import MonitoringStation
 from floodsystem.station import inconsistent_typical_range_stations
+import type_validation as tv
+
+_o_inconsistent_typical_range_stations = inconsistent_typical_range_stations
+
+
+def _i_inconsistent_typical_range_stations(stations):
+    tv.assert_type(stations, (list, MonitoringStation))
+    ret = _o_inconsistent_typical_range_stations(stations)
+    tv.assert_type(ret, (list, MonitoringStation))
+    return ret
+
+
+inconsistent_typical_range_stations = _i_inconsistent_typical_range_stations
 
 
 def test_create_monitoring_station():
