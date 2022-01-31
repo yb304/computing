@@ -71,7 +71,7 @@ def _i_rivers_by_station_number(stations, N):
     # number of rivers should be smaller or equal to the number of stations
     assert len(ret) <= len(stations)
     for river in ret[N:]:
-        assert river[1] == ret[N-1]
+        assert river[1] == ret[N-1][1]
     return ret
 
 
@@ -138,4 +138,3 @@ def test_rivers_by_station_number():
     rivers_by_station_number(stations, len(stations))
     rivers_by_station_number(stations, 9)
     assert [] == rivers_by_station_number([], 9)
-    
