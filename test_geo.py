@@ -1,8 +1,8 @@
 import sys
 import random
 from functools import reduce
-from tkinter import N
 import type_validation as tv
+
 
 from floodsystem.station import MonitoringStation
 from floodsystem.geo import \
@@ -14,6 +14,7 @@ _o_stations_within_radius = stations_within_radius
 _o_rivers_with_station = rivers_with_station
 _o_stations_by_river = stations_by_river
 _o_rivers_by_station_number = rivers_by_station_number
+
 
 def _i_stations_by_distance(stations, p):
     tv.assert_type(stations, (list, MonitoringStation))
@@ -59,19 +60,19 @@ def _i_stations_by_river(stations):
                                   (lambda l: len(l) > 0)])))
     return ret
 
+
 def _i_rivers_by_station_number(stations, N):
-    #TODO
     tv.assert_type(stations, (list, MonitoringStation))
     tv.assert_type(N, ("and", [int, tv.non_neg_p]))
     ret = _o_rivers_by_station_number(stations, N)
-    tv.assert_type(ret,
-                   (list, (tuple,
-                           [tv.non_empty_str_spec,
-                            ("and", [int, lambda x: x>0])])))
+    tv.assert_type(
+        ret, (list,
+              (tuple, [tv.non_empty_str_spec,
+                       ("and", [int, lambda x: x > 0])])))
     # number of rivers should be smaller or equal to the number of stations
     assert len(ret) <= len(stations)
     for river in ret[N:]:
-        assert river[1] == ret[N-1][1]
+        assert river[1] == ret[N - 1][1]
     return ret
 
 

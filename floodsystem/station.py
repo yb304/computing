@@ -39,15 +39,12 @@ class MonitoringStation:
         d += "   typical range: {}".format(self.typical_range)
         return d
 
-
     def typical_range_consistent(self):
         """
-        return false for range with no data or high point is lower than low point of river 
-          
+        return false for range with no data or high point is lower than low point of river
+
         """
-        return self.typical_range == None or self.typical_range[
-               0] > self.typical_range[1]
-       
+        return self.typical_range is None or self.typical_range[0] > self.typical_range[1]
 
 
 def inconsistent_typical_range_stations(stations):

@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: MIT
 """Unit test for the station module"""
 
-from re import S
 from floodsystem.station import MonitoringStation
 from floodsystem.station import inconsistent_typical_range_stations
 import type_validation as tv
@@ -72,7 +71,6 @@ def test_inconsistent_typical_range_stations():
 
     assert (inconsistent_typical_range_stations([ntrs, wrs, s]) == [ntrs, wrs])
     assert [] == inconsistent_typical_range_stations([])
-    assert (s.typical_range_consistent() == True)
-    assert (ntrs.typical_range_consistent() == False)
-    assert (wrs.typical_range_consistent() == False)
-
+    assert s.typical_range_consistent()
+    assert not ntrs.typical_range_consistent()
+    assert not wrs.typical_range_consistent()
