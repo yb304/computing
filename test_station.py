@@ -57,5 +57,5 @@ def test_inconsistent_typical_range_stations():
     town = "My Town"
     s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
 
-    assert (inconsistent_typical_range_stations([ntrs, wrs, s]) == [ntrs, wrs, s])
+    assert (inconsistent_typical_range_stations([ntrs, wrs, s]) == [ntrs, wrs])
     assert [] == inconsistent_typical_range_stations([])
