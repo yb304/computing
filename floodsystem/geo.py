@@ -93,6 +93,3 @@ def rivers_by_station_number(stations, N):
             new_list.append(full_list[i])
 
     return new_list
-
-
-

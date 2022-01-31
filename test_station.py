@@ -7,6 +7,7 @@ from floodsystem.station import MonitoringStation
 from floodsystem.station import typical_range_consistent
 from floodsystem.station import inconsistent_typical_range_stations
 
+
 def test_create_monitoring_station():
 
     # Create a station
@@ -27,6 +28,7 @@ def test_create_monitoring_station():
     assert s.river == river
     assert s.town == town
 
+
 def test_inconsistent_typical_range_stations():
     s_id = "test-s-id"
     m_id = "test-m-id"
@@ -36,7 +38,7 @@ def test_inconsistent_typical_range_stations():
     river = "River X"
     town = "My Town"
     ntrs = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
-    
+
     s_id = "test-s-id"
     m_id = "test-m-id"
     label = "wrong range of stations"
@@ -46,4 +48,4 @@ def test_inconsistent_typical_range_stations():
     town = "My Town"
     wrs = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
 
-    assert(inconsistent_typical_range_stations([ntrs, wrs]) == [ntrs, wrs])
+    assert (inconsistent_typical_range_stations([ntrs, wrs]) == [ntrs, wrs])
