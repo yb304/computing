@@ -62,3 +62,4 @@ def test_inconsistent_typical_range_stations():
     assert (s.typical_range_consistent() == True)
     assert (ntrs.typical_range_consistent() == False)
     assert (wrs.typical_range_consistent() == False)
+

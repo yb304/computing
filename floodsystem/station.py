@@ -41,6 +41,12 @@ class MonitoringStation:
 
 
     def typical_range_consistent(self):
+        """
+        Args:
+          stations: list of MonitoringStation objects
+        Returns;
+          list of stations with consistent data
+        """
         if self.typical_range == None or self.typical_range[
                0] > self.typical_range[1]:
             return False
