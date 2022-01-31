@@ -13,7 +13,7 @@ _o_stations_by_distance = stations_by_distance
 _o_stations_within_radius = stations_within_radius
 _o_rivers_with_station = rivers_with_station
 _o_stations_by_river = stations_by_river
-
+_o_rivers_by_station_number = rivers_by_station_number
 
 def _i_stations_by_distance(stations, p):
     tv.assert_type(stations, (list, MonitoringStation))
@@ -59,11 +59,27 @@ def _i_stations_by_river(stations):
                                   (lambda l: len(l) > 0)])))
     return ret
 
+def _i_rivers_by_station_number(stations, N):
+    #TODO
+    tv.assert_type(stations, (list, MonitoringStation))
+    tv.assert_type(N, ("and", [int, tv.non_neg_p]))
+    ret = _o_rivers_by_station_number(stations, N)
+    tv.assert_type(ret,
+                   (list, (tuple,
+                           [tv.non_empty_str_spec,
+                            ("and", [int, lambda x: x>0])])))
+    # number of rivers should be smaller or equal to the number of stations
+    assert len(ret) <= len(stations)
+    for river in ret[N:]:
+        assert river[1] == ret[N-1]
+    return ret
+
 
 stations_by_distance = _i_stations_by_distance
 stations_within_radius = _i_stations_within_radius
 rivers_with_station = _i_rivers_with_station
 stations_by_river = _i_stations_by_river
+rivers_by_station_number = _i_rivers_by_station_number
 
 stations = build_station_list()
 
@@ -119,21 +135,7 @@ def test_stations_by_river():
 
 
 def test_rivers_by_station_number():
-    list1 = rivers_by_station_number(stations, len(stations))
-    list2 = rivers_by_station_number(stations, 9)
-
-    limit = list2[-1][1]
-    river_list = {}
-    # all items in list 2 should be greater or equal to the number of station of the last item in the list
-    for i in list1:
-        river_list[i[0]] = i[1]
-        if i[1] >= limit:
-            assert (i in list2)
-        else:
-            assert (i not in list2)
-    # number of entries should be greater or equal to the stations input
-    for i in list2:
-        assert len(list2) >= len(rivers_by_station_number(stations, N))
-    # empty list
-    for i, zero in river_list.items():
-        assert (zero == 0)
+    rivers_by_station_number(stations, len(stations))
+    rivers_by_station_number(stations, 9)
+    assert [] == rivers_by_station_number([], 9)
+    
