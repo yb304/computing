@@ -44,7 +44,7 @@ class MonitoringStation:
         return false for range with no data or high point is lower than low point of river
 
         """
-        return self.typical_range is None or self.typical_range[0] > self.typical_range[1]
+        return not (self.typical_range is None or self.typical_range[0] > self.typical_range[1])
 
 
 def inconsistent_typical_range_stations(stations):
