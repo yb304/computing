@@ -10,6 +10,7 @@ def run():
     update_water_levels(stations)
 
     highest_5 = stations_highest_rel_level(stations, 5)
+    
     dates = []
     levels = []
     for station in highest_5:
