@@ -6,10 +6,12 @@ stations = build_station_list()
 update_water_levels(stations)
 
 def test_stations_level_over_threshold():
-    list1 = stations_level_over_threshold(stations, 0.8)
+    threshold = 0.8
+    list1 = stations_level_over_threshold(stations, threshold)
     for n in list1:
-        assert n[1] > 0.8
-        assert list1[n][1] <= list1[n-1][1]
+        level = n[1]
+        assert level > threshold
+        assert level <= list1[i-1][1]
 
 def test_stations_highest_rel_level():
     list2 = stations_highest_rel_level(stations, 10)
