@@ -4,13 +4,14 @@ from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.plot import plot_water_levels
 from datetime import timedelta
 
+
 def run():
 
     stations = build_station_list()
     update_water_levels(stations)
 
     highest_5 = stations_highest_rel_level(stations, 5)
-    
+
     dates = []
     levels = []
     for station in highest_5:

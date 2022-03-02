@@ -44,14 +44,17 @@ class MonitoringStation:
         return false for range with no data or high point is lower than low point of river
 
         """
-        return not (self.typical_range is None or self.typical_range[0] > self.typical_range[1])
+        return not (self.typical_range is None
+                    or self.typical_range[0] > self.typical_range[1])
 
     def relative_water_level(self):
         if not self.typical_range_consistent() or self.latest_level == None:
-          return None  
+            return None
         else:
-          return (self.latest_level - self.typical_range[0]) / (self.typical_range[1] - self.typical_range[0])
-        
+            return (self.latest_level - self.typical_range[0]) / (
+                self.typical_range[1] - self.typical_range[0])
+
+
 def inconsistent_typical_range_stations(stations):
     """
     Args:

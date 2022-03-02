@@ -13,11 +13,13 @@ def stations_level_over_threshold(stations, tol):
 
 def stations_highest_rel_level(stations, N):
     stations_with_level = [(station, station.relative_water_level())
-        for station in stations
-        if station.relative_water_level() != None]
+                           for station in stations
+                           if station.relative_water_level() != None]
 
     # [(Station1, 2.4), (Station2, 4.2)]
-    sorted_stations_with_level = sorted_by_key(stations_with_level, 1, reverse=True)[:N]
+    sorted_stations_with_level = sorted_by_key(stations_with_level,
+                                               1,
+                                               reverse=True)[:N]
 
     # [Station1 , Station2]
     sorted_stations = [n[0] for n in sorted_stations_with_level]

@@ -3,7 +3,6 @@ import random
 from functools import reduce
 import type_validation as tv
 
-
 from floodsystem.station import MonitoringStation
 from floodsystem.geo import \
     stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river, rivers_by_station_number
