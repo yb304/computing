@@ -33,6 +33,17 @@ MonitoringStation.relative_water_level = _i_relative_water_level
 stations = build_station_list()
 
 
+def new_sample_station():
+    s_id = "test-s-id"
+    m_id = "test-m-id"
+    label = "some station"
+    coord = (-2.0, 4.0)
+    trange = (-2.3, 3.4445)
+    river = "River X"
+    town = "My Town"
+    return MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+
+
 def test_create_monitoring_station():
     # Create a station
     s_id = "test-s-id"
@@ -54,32 +65,15 @@ def test_create_monitoring_station():
 
 
 def test_inconsistent_typical_range_stations():
-    s_id = "test-s-id"
-    m_id = "test-m-id"
-    label = "no station"
-    coord = (-2.0, 4.0)
-    trange = None
-    river = "River X"
-    town = "My Town"
-    ntrs = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+    ntrs = new_sample_station()
+    ntrs.label = "no station"
+    ntrs.typical_range = None
 
-    s_id = "test-s-id"
-    m_id = "test-m-id"
-    label = "wrong range of stations"
-    coord = (-2.0, 4.0)
-    trange = (2.3, -3.4445)
-    river = "River X"
-    town = "My Town"
-    wrs = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+    wrs = new_sample_station()
+    wrs.label = "wrong range of stations"
+    wrs.typical_range = (2.3, -3.4445)
 
-    s_id = "test-s-id"
-    m_id = "test-m-id"
-    label = "some station"
-    coord = (-2.0, 4.0)
-    trange = (-2.3, 3.4445)
-    river = "River X"
-    town = "My Town"
-    s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+    s = new_sample_station()
 
     assert (inconsistent_typical_range_stations([ntrs, wrs, s]) == [ntrs, wrs])
     assert [] == inconsistent_typical_range_stations([])
@@ -89,14 +83,7 @@ def test_inconsistent_typical_range_stations():
 
 
 def test_relative_water_level():
-    s_id = "test-s-id"
-    m_id = "test-m-id"
-    label = "some station"
-    coord = (-2.0, 4.0)
-    trange = (-2.3, 3.4445)
-    river = "River X"
-    town = "My Town"
-    s = MonitoringStation(s_id, m_id, label, coord, trange, river, town)
+    s = new_sample_station()
 
     s.latest_level = None
     assert s.relative_water_level() is None
