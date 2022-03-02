@@ -1,7 +1,5 @@
 import pprint as pp
 import re
-import operator as op
-from functools import partial
 
 
 def check_tuple(x, args):
@@ -133,7 +131,7 @@ def fmt_spec(spec, level=0):
         return firstor(pp.pprint(spec), str(spec))
 
 
-truncate_lines_re = re.compile(r"(?:[^\n]*\n?){,16}")
+truncate_lines_re = re.compile(r"(?:[^\n]*\n?){,30}")
 
 
 def assert_type(x, spec):
@@ -152,7 +150,3 @@ def assert_type(x, spec):
             + fmt_spec(spec)
             + "\nGot:\n"
             + x_str)
-
-
-non_neg_p = partial(op.le, 0)
-non_empty_str_spec = ("and", [str, (lambda x: x)])

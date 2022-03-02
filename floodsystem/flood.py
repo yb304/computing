@@ -3,12 +3,13 @@ from .station import MonitoringStation
 
 
 def stations_level_over_threshold(stations, tol):
-    return sorted_by_key(
-        [(station, station.relative_water_level())
-         for station in stations if station.relative_water_level() != None
-         and station.relative_water_level() > tol],
-        1,
-        reverse=True)
+    tuples = map(lambda s: (s, s.relative_water_level()), stations)
+    filtered_tuples = filter(lambda t:
+                             t[1] is not None and t[1] > tol,
+                             tuples)
+    sorted_tuples = list(sorted_by_key(filtered_tuples, 1, reverse=True))
+    print(sorted_tuples[:10])
+    return sorted_tuples
 
 
 def stations_highest_rel_level(stations, N):

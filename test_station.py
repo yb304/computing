@@ -3,10 +3,12 @@
 # SPDX-License-Identifier: MIT
 """Unit test for the station module"""
 
-from floodsystem.station import MonitoringStation
-from floodsystem.station import inconsistent_typical_range_stations
-from floodsystem.stationdata import build_station_list
 import type_validation as tv
+from floodsystem.station import (MonitoringStation,
+                                 inconsistent_typical_range_stations)
+from floodsystem.stationdata import build_station_list
+from type_specs import rel_level_p
+
 
 _o_inconsistent_typical_range_stations = inconsistent_typical_range_stations
 _o_relative_water_level = MonitoringStation.relative_water_level
@@ -21,7 +23,7 @@ def _i_inconsistent_typical_range_stations(stations):
 
 def _i_relative_water_level(self):
     rwl = _o_relative_water_level(self)
-    tv.assert_type(rwl, ("maybe", float))
+    tv.assert_type(rwl, ("maybe", rel_level_p))
     if not self.typical_range_consistent():
         assert rwl is None
     return rwl

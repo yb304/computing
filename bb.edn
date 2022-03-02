@@ -13,4 +13,6 @@
                                 s
                                 (str "test_" s ".py")))
                             *command-line-args*))
-                  ["--cov=floodsystem"]))}}
+                  ["--cov=floodsystem"]))
+
+  repl (clojure "-M:lib/hotload:lib/babashka:inspect/reveal:inspect/portal-clj:middleware/cider-clj")}}
