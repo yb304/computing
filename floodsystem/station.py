@@ -52,7 +52,7 @@ class MonitoringStation:
         """
         return a list of relative water levels if stations are consistent and have valus for latest level
         """
-        if not self.typical_range_consistent() or self.latest_level == None:
+        if not self.typical_range_consistent() or self.latest_level is None:
             return None
         else:
             return (self.latest_level - self.typical_range[0]) / (

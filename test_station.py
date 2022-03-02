@@ -66,10 +66,15 @@ def test_create_monitoring_station():
     assert s.town == town
 
 
-def test_inconsistent_typical_range_stations():
+def new_sample_station_no_typ_range():
     ntrs = new_sample_station()
     ntrs.label = "no station"
     ntrs.typical_range = None
+    return ntrs
+
+
+def test_inconsistent_typical_range_stations():
+    ntrs = new_sample_station_no_typ_range()
 
     wrs = new_sample_station()
     wrs.label = "wrong range of stations"

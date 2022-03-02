@@ -2,6 +2,7 @@ import sys
 import random
 from functools import reduce
 import type_validation as tv
+from type_specs import non_neg_p, non_empty_str_spec
 
 from floodsystem.station import MonitoringStation
 from floodsystem.geo import \
@@ -21,7 +22,7 @@ def _i_stations_by_distance(stations, p):
     ret = _o_stations_by_distance(stations, p)
     tv.assert_type(
         ret,
-        (list, (tuple, [MonitoringStation, ("and", [float, tv.non_neg_p])])))
+        (list, (tuple, [MonitoringStation, ("and", [float, non_neg_p])])))
     assert len(ret) == len(stations)
 
     # Ascending order
@@ -36,7 +37,7 @@ def _i_stations_by_distance(stations, p):
 def _i_stations_within_radius(stations, centre, r):
     tv.assert_type(stations, (list, MonitoringStation))
     tv.assert_type(centre, (tuple, [float, float]))
-    tv.assert_type(r, ("and", [float, tv.non_neg_p]))
+    tv.assert_type(r, ("and", [float, non_neg_p]))
     ret = _o_stations_within_radius(stations, centre, r)
     tv.assert_type(ret, (list, MonitoringStation))
     assert len(ret) <= len(stations)
@@ -47,14 +48,14 @@ def _i_stations_within_radius(stations, centre, r):
 def _i_rivers_with_station(stations):
     tv.assert_type(stations, (list, MonitoringStation))
     ret = _o_rivers_with_station(stations)
-    tv.assert_type(ret, (set, tv.non_empty_str_spec))
+    tv.assert_type(ret, (set, non_empty_str_spec))
     return ret
 
 
 def _i_stations_by_river(stations):
     tv.assert_type(stations, (list, MonitoringStation))
     ret = _o_stations_by_river(stations)
-    tv.assert_type(ret, (dict, tv.non_empty_str_spec,
+    tv.assert_type(ret, (dict, non_empty_str_spec,
                          ("and", [(list, MonitoringStation),
                                   (lambda l: len(l) > 0)])))
     return ret
@@ -62,11 +63,11 @@ def _i_stations_by_river(stations):
 
 def _i_rivers_by_station_number(stations, N):
     tv.assert_type(stations, (list, MonitoringStation))
-    tv.assert_type(N, ("and", [int, tv.non_neg_p]))
+    tv.assert_type(N, ("and", [int, non_neg_p]))
     ret = _o_rivers_by_station_number(stations, N)
     tv.assert_type(
         ret, (list,
-              (tuple, [tv.non_empty_str_spec,
+              (tuple, [non_empty_str_spec,
                        ("and", [int, lambda x: x > 0])])))
     # number of rivers should be smaller or equal to the number of stations
     assert len(ret) <= len(stations)
