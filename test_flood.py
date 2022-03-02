@@ -53,7 +53,9 @@ def test_stations_level_over_threshold():
 def test_stations_highest_rel_level():
     list2 = stations_highest_rel_level(stations, 10)
     assert len(list2) == min(stations, 10)
-    for n in list2:
-        assert list2[n][1] <= list2[n - 1][1]
+    prev_level = sys.float_info.max
+    for n, rel_level in list2:
+       assert rel_level <= prev_level
+       prev_level = rel_level
 
     assert list2.typical_range_consistent()
