@@ -8,8 +8,8 @@ def run():
     update_water_levels(stations)
 
     for station in stations_highest_rel_level(stations, 10):
-        print("Station name and current level: {}, {}".format(
-            station[0].name, station[1]))
+        print("Station {} has current water level: {}".format(
+            station.name, station.relative_water_level()))
 
 
 if __name__ == "__main__":
