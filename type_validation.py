@@ -63,11 +63,23 @@ def check_and(x, args):
     return (True,)
 
 
+def check_maybe(x, args):
+    spec = args[0]
+    if x is None:
+        return (True,)
+    r = check_type(x, spec)
+    if r[0]:
+        return (True,)
+    else:
+        return r
+
+
 name_to_checker = {list: check_list,
                    tuple: check_tuple,
                    set: check_set,
                    dict: check_dict,
-                   "and": check_and}
+                   "and": check_and,
+                   "maybe": check_maybe}
 
 
 def check_spec(x, spec):
