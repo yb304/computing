@@ -81,6 +81,7 @@ name_to_checker = {list: check_list,
 
 
 def check_spec(x, spec):
+    assert isinstance(spec, tuple)
     variant = spec[0]
     v = name_to_checker[variant](x, spec[1:])
     return v
@@ -135,7 +136,7 @@ truncate_lines_re = re.compile(r"(?:[^\n]*\n?){,30}")
 
 
 def assert_type(x, spec):
-    result = check_spec(x, spec)
+    result = check_type(x, spec)
     if not result[0]:
         msg = result[1]
         msg = "" if msg is None else "\n" + msg
