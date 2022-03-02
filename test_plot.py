@@ -7,6 +7,7 @@ from floodsystem.station import MonitoringStation, inconsistent_typical_range_st
 from datetime import datetime, timedelta
 from floodsystem.plot import plot_water_levels, plot_water_levels_no_show, plot_water_level_with_fit
 import test_analysis
+from test_analysis import sample_dates, sample_levels, sample_levels2
 
 
 enable_plot_tests = False
@@ -45,25 +46,19 @@ plot_water_level = _i_plot_water_level_with_fit
 
 stations = build_station_list()
 
-sample_times = [datetime(2016, 12, 30), datetime(2016, 12, 31), datetime(2017, 1, 1),
-                datetime(2017, 1, 2), datetime(2017, 1, 3), datetime(2017, 1, 4),
-                datetime(2017, 1, 5)]
-
-sample_levels = [0.2, 0.7, 0.95, 0.92, 1.02, 0.91, 0.64]
-
 
 def test_plot_water_level():
     if not enable_plot_tests:
         return
     # should not throw errors
     plot_water_levels(stations[0], [], [])
-    plot_water_levels(stations[0], sample_times, sample_levels)
+    plot_water_levels(stations[0], sample_dates, sample_levels)
 
 
 def test_plot_water_level_with_fit():
     # test for no errors
     plot_water_level_with_fit(
         stations[0],
-        test_analysis.sample_dates,
-        test_analysis.sample_levels,
+        sample_dates,
+        sample_levels2,
         4)
