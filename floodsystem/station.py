@@ -49,6 +49,9 @@ class MonitoringStation:
                     or self.typical_range[0] > self.typical_range[1])
 
     def relative_water_level(self):
+        """
+        return a list of relative water levels if stations are consistent and have valus for latest level
+        """
         if not self.typical_range_consistent() or self.latest_level == None:
             return None
         else:
