@@ -1,18 +1,42 @@
+import sys
+import type_validation as tv
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_level_over_threshold, stations_highest_rel_level
 from floodsystem.station import MonitoringStation, inconsistent_typical_range_stations
+
+
+_o_stations_level_over_threshold = stations_level_over_threshold
+
+
+def _i_stations_level_over_threshold(stations, n):
+    tv.assert_type(stations, (list, MonitoringStation))
+    tv.assert_type(n, float)
+    stns = stations_level_over_threshold(stations, n)
+    tv.assert_type(stns, (list, (tuple, [MonitoringStation, float])))
+    return stns
+
+
+stations_level_over_threshold = _i_stations_level_over_threshold
 
 stations = build_station_list()
 update_water_levels(stations)
 
 
 def test_stations_level_over_threshold():
-    threshold = 0.8
-    list1 = stations_level_over_threshold(stations, threshold)
-    for n in list1:
-        level = n[1]
-        assert level > threshold
-        assert level <= list1[i - 1][1]
+    def test_for_tol(threshold):
+        stns_over_tol = stations_level_over_threshold(stations, threshold)
+        assert len(stns_over_tol) <= len(stations)
+
+        prev_level = sys.float_info.max
+        for s, rel_level in stns_over_tol:
+            assert rel_level > threshold
+            # Test descending order by relative level
+            assert rel_level >= prev_level
+            prev_level = rel_level
+
+    test_for_tol(0)
+    test_for_tol(0.5)
+    test_for_tol(1)
 
 
 def test_stations_highest_rel_level():
