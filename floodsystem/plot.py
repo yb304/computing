@@ -35,6 +35,15 @@ def plot_water_levels_no_show(station, dates, levels):
 
 
 def plot_water_levels(station, dates, levels):
+    """
+    Displays a Matplotlib plot of the provided water level data against time for a station.
+    The typical low and high levels are also plotted.
+
+    Args:
+      station: MonitoringStation object
+      dates: list of datetime objects
+      levels: list of water levels (floats)
+    """
     plot_water_levels_no_show(station, dates, levels)
     plt.show()
 
@@ -63,7 +72,6 @@ def plot_water_level_with_fit(station, dates, levels, p):
       levels: list of water levels (y axis)
     """
     plt.rc("lines", marker=".", linestyle="None")
-    print(dates)
     plot_water_levels_no_show(station, dates, levels)
     matplotlib.pyplot.rcdefaults()
     poly, offset = polyfit(dates, levels, p)

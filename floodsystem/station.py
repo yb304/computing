@@ -50,7 +50,17 @@ class MonitoringStation:
 
     def relative_water_level(self):
         """
-        return a list of relative water levels if stations are consistent and have valus for latest level
+        Returns the latest water level as a fraction of the typical range.
+        None is returned if the typical range data is inconsistent or
+        if the latest water level data is not available.
+
+        Consider calling `stationdata.update_water_levels` first.
+
+        Examples:
+          water level == typical high:
+            returns 1.0
+          water level == typical low:
+            returns 0.0
         """
         if not self.typical_range_consistent() or self.latest_level is None:
             return None
