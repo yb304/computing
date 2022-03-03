@@ -6,9 +6,10 @@ def run():
     stations = build_station_list()
     update_water_levels(stations)
 
-    print("\nCurrent station relative water levels:")
-    for station in stations_highest_rel_level(stations, 10):
-        print(f"{station.name:<50} {station.relative_water_level():>10}")
+    n = 10
+    print(f"\nRelative water levels of the {n} currently most at-risk stations:\n")
+    for station in stations_highest_rel_level(stations, n):
+        print(f"{station.name:<50} {station.relative_water_level():11.6f}")
 
 
 if __name__ == "__main__":

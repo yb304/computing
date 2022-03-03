@@ -3,13 +3,12 @@ from floodsystem.stationdata import build_station_list, update_water_levels
 
 
 def run():
-
     stations = build_station_list()
     update_water_levels(stations)
 
+    print("\nRelative water levels of stations where it is >0.8:\n")
     for station in stations_level_over_threshold(stations, 0.8):
-        print("Station name and current level: {}, {}".format(
-            station[0].name, station[1]))
+        print(f"{station[0].name:<50} {station[1]:11.6f}")
 
 
 if __name__ == "__main__":
