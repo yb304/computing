@@ -10,7 +10,7 @@ from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.datafetcher import fetch_measure_levels
 from test_flood import stations_highest_rel_level
 from test_analysis import polyfit
-from test_plot import plot_water_levels_no_show
+from test_plot import plot_water_levels_no_show, plot_water_level_with_fit
 
 
 def run():
@@ -24,9 +24,8 @@ def run():
             print(f"Warning: no level history data found for station:\n{s}")
             continue
 
-        poly, time_shift = polyfit(dates, levels, 4)
         plt.figure(i + 1)
-        plot_water_levels_no_show(s, dates, levels)
+        plot_water_level_with_fit(s, dates, levels, 4)
 
     plt.show()
 
