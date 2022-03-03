@@ -1,3 +1,4 @@
+import sys
 import math
 import collections
 import pickle
@@ -185,6 +186,8 @@ all_towns = get_towns(stations)
 
 
 def run():
+    argn = int(sys.argv[1]) if len(sys.argv) > 1 else None
+
     global measure_levels_by_station_id
     try:
         measure_levels_by_station_id = load_measure_levels()
@@ -199,7 +202,7 @@ def run():
     save_measure_levels()
 
     print("\nTowns where we assess the risk of flooding to be greatest.\n")
-    n = ask_for_n()
+    n = ask_for_n() if argn is None else argn
     present_towns_with_greatest_risk(all_towns, n)
 
 
