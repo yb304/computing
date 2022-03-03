@@ -3,7 +3,7 @@ import numpy as np
 from type_specs import rel_level_p, nat_int_p
 from datetime import datetime, timedelta
 from floodsystem.analysis import polyfit
-import matplotlib
+from matplotlib.dates import num2date
 
 _o_polyfit = polyfit
 
@@ -30,7 +30,7 @@ sample_dates = [
 ]
 sample_levels = [0.2, 0.7, 0.95, 0.92, 1.02, 0.91, 0.64]
 
-sample_dates2 = matplotlib.dates.num2date(np.linspace(10000, 10002, 10))
+sample_dates2 = num2date(np.linspace(10000, 10002, 10))
 sample_levels2 = [0.1, 0.09, 0.23, 0.34, 0.78, 0.74, 0.43, 0.31, 0.01, -0.05]
 
 
