@@ -1,5 +1,4 @@
 from .utils import sorted_by_key
-from .station import MonitoringStation
 
 
 def stations_level_over_threshold(stations, tol):
@@ -13,9 +12,7 @@ def stations_level_over_threshold(stations, tol):
       sorted in descending order by the relative water level
     """
     tuples = map(lambda s: (s, s.relative_water_level()), stations)
-    filtered_tuples = filter(lambda t:
-                             t[1] is not None and t[1] > tol,
-                             tuples)
+    filtered_tuples = filter(lambda t: t[1] is not None and t[1] > tol, tuples)
     sorted_tuples = list(sorted_by_key(filtered_tuples, 1, reverse=True))
     return sorted_tuples
 

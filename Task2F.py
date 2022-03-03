@@ -9,8 +9,7 @@ import matplotlib.pyplot as plt
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.datafetcher import fetch_measure_levels
 from test_flood import stations_highest_rel_level
-from test_analysis import polyfit
-from test_plot import plot_water_levels_no_show, plot_water_level_with_fit
+from test_plot import plot_water_level_with_fit
 
 
 def run():

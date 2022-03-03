@@ -3,7 +3,7 @@ import type_validation as tv
 from type_specs import rel_level_p, nat_int_p
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_level_over_threshold, stations_highest_rel_level
-from floodsystem.station import MonitoringStation, inconsistent_typical_range_stations
+from floodsystem.station import MonitoringStation
 import test_station
 
 _o_stations_level_over_threshold = stations_level_over_threshold

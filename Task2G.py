@@ -7,7 +7,7 @@ from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.analysis import polyfit
 # from test_flood import stations_level_over_threshold
 from floodsystem.flood import stations_level_over_threshold
-from datetime import datetime, timedelta
+from datetime import timedelta
 from matplotlib.dates import date2num
 import copy
 

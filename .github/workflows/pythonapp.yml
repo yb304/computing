@@ -27,8 +27,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install  flake8 matplotlib pytest requests haversine
 
-      # - name: Lint with flake8
-      #   run: flake8 --statistics *.py
+      - name: Lint with flake8
+        run: flake8 --statistics *.py
 
       - name: Run unit tests using pytest
         run: pytest -v
@@ -50,3 +50,4 @@ jobs:
           python Task2D.py
           python Task2E.py
           python Task2F.py
+          python Task2G.py

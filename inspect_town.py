@@ -2,10 +2,7 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.datafetcher import fetch_measure_levels
-from test_flood import stations_highest_rel_level
-from test_analysis import polyfit
-from test_plot import plot_water_levels_no_show, plot_water_level_with_fit
-
+from test_plot import plot_water_level_with_fit
 
 stations = build_station_list()
 update_water_levels(stations)
@@ -17,7 +14,7 @@ for i, s in enumerate(filtered_stns):
     print(s)
     print(f"relative level: {s.relative_water_level()}")
     if len(dates) == 0:
-        print(f"Warning: no level history data found for station")
+        print("Warning: no level history data found for station")
         continue
 
     plt.figure(i + 1)

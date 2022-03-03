@@ -15,7 +15,8 @@ def run():
     print(highest_5)
 
     for i, station in enumerate(highest_5):
-        dates, levels = fetch_measure_levels(station.measure_id, timedelta(days=10))
+        dates, levels = fetch_measure_levels(station.measure_id,
+                                             timedelta(days=10))
         plt.figure(i + 1)
         plot_water_levels_no_show(station, dates, levels)
 
